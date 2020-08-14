@@ -33,7 +33,7 @@ class ContactsController < ApplicationController
     end
   end
 
-  # DELETE /contacts/1
+  # DELETE /contacts/1s
   def destroy
     # To destroy a phone_number phones_attributes: {"id": 0, "_destroy": 1}
     @contact.destroy
@@ -47,10 +47,12 @@ class ContactsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def contact_params
-      params.require(:contact).permit(
-        :name, :email, :birthdate, :kind_id, 
-        phones_attributes: [:id, :number, :_destroy],
-        address_attributes: [:id, :street, :city]
-      )
+      # params.require(:contact).permit(
+      #   :name, :email, :birthdate, :kind_id, 
+      #   phones_attributes: [:id, :number, :_destroy],
+      #   address_attributes: [:id, :street, :city]
+      # )
+
+      ActiveModelSerializers::Deserialization.jsonapi_parse(params)
     end
 end
