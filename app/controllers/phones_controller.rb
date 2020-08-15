@@ -6,7 +6,7 @@ class PhonesController < ApplicationController
   end
 
   private
-  def set_phones
-    @phones = Contact.find(params[:contact_id]).phones
-  end
+    def set_phones
+      @phones = Contact.find(params[:contact_id]).phones
+    end
 end
