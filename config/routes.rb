@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # get 'addresses/show'
-
+  
+  resources :auths, only: [:create]
   resources :kinds
   
   resources :contacts do

@@ -1,7 +1,7 @@
 class KindsController < ApplicationController
   before_action :set_kind, only: [:show, :update, :destroy]
 
-  TOKEN = "secret123" # Gera um token de autenticação estatico
+  # TOKEN = "secret123" # Gera um token de autenticação estatico
   
   include ActionController::HttpAuthentication::Token::ControllerMethods
 
@@ -62,10 +62,13 @@ class KindsController < ApplicationController
 
     def authenticate
       authenticate_or_request_with_http_token do |token, options|
-        ActiveSupport::SecurityUtils.secure_compare(
-          ::Digest::SHA256.hexdigest(token),
-          ::Digest::SHA256.hexdigest(TOKEN)
-          )
+        hmac_secret = "my$ecretK3y"
+        JWT.decode token, hmac_secret, true, { :algorithm => 'HS256' }
+        # ActiveSupport::SecurityUtils.secure_compare(
+        #  ::Digest::SHA256.hexdigest(token),
+        #  ::Digest::SHA256.hexdigest(TOKEN)
+        #  )
+
       end
     end
 end
