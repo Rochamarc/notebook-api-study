@@ -23,6 +23,9 @@ gem 'puma', '~> 3.0'
 
 # JSON web token
 gem 'jwt'
+# Criando autenticacao com devise token auth
+gem 'devise_token_auth'
+gem 'devise'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
