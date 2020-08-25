@@ -25,6 +25,7 @@ gem 'puma', '~> 3.0'
 gem 'jwt'
 # Criando autenticacao com devise token auth
 gem 'devise_token_auth'
+gem 'devise-i18n'
 gem 'devise'
 
 # Use Capistrano for deployment
