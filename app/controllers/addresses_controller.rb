@@ -1,6 +1,7 @@
 class AddressesController < ApplicationController
   before_action :set_contact
   
+  before_action :authenticate_user!
   def create
     @contact.address = Address.new(address_params)
 

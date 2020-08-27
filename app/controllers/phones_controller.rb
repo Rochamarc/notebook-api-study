@@ -1,6 +1,7 @@
 class PhonesController < ApplicationController
   before_action  :set_contact
   
+  before_action :authenticate_user!
   def create
     # Diferente do address voce precisa jogar o (has_many) objeto dentro da classe dona 
     @contact.phones << Phone.new(phone_params)
