@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   resources :kinds
   
   scope module: 'v1' do
-    resources :contacts do
+    # Pega a versao que esta sendo passada pela query, atraves de uma lambda function
+    resources :contacts, :constraints => lambda { |request| request.params[:version] == "1" } do
       resource :kind, only: [:show]
       resource :kind, only: [:show], path: 'relationships/kind'
 
@@ -21,7 +22,7 @@ Rails.application.routes.draw do
   end
 
   scope module: 'v2' do
-    resources :contacts do
+    resources :contacts, :constraints => lambda { |request| request.params[:version] == "2" } do
       resource :kind, only: [:show]
       resource :kind, only: [:show], path: 'relationships/kind'
 

@@ -6,7 +6,7 @@ module V2
 
     # GET /contacts
     def index
-      @contacts = Contact.all
+      @contacts = Contact.last(10).reverse
 
       render json: @contacts #, methods: [:hello, :i18n]
     end
