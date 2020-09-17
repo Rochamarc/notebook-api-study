@@ -2,12 +2,12 @@ Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'auth'
   # get 'addresses/show'
   
-  resources :auths, only: [:create]
+  # resources :auths, only: [:create]
   resources :kinds
   
-  scope module: 'v1' do
-    # Pega a versao que esta sendo passada pela query, atraves de uma lambda function
-    resources :contacts, :constraints => lambda { |request| request.params[:version] == "1" } do
+  # Pega a versao da mesma maneira que query parameter, porem atraves da lib versionist
+  api_version(:module => "V1", :parameter => {:name => "version", :value => "1"}) do 
+    resources :contacts do 
       resource :kind, only: [:show]
       resource :kind, only: [:show], path: 'relationships/kind'
 
@@ -21,8 +21,8 @@ Rails.application.routes.draw do
     end
   end
 
-  scope module: 'v2' do
-    resources :contacts, :constraints => lambda { |request| request.params[:version] == "2" } do
+  api_version(:module => "V2", :parameter => {:name => "version", :value => "2"}) do 
+    resources :contacts do  
       resource :kind, only: [:show]
       resource :kind, only: [:show], path: 'relationships/kind'
 
