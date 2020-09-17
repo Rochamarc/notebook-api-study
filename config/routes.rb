@@ -6,33 +6,37 @@ Rails.application.routes.draw do
   resources :kinds
   
   # Pega a versao da mesma maneira que query parameter, porem atraves da lib versionist
-  api_version(:module => "V1", :header => {:name => "X-Version", :value => "1.0"}) do 
-    resources :contacts do 
-      resource :kind, only: [:show]
-      resource :kind, only: [:show], path: 'relationships/kind'
+  constraints subdomain: 'v1' do  
+    scope module: 'v1' do  
+      resources :contacts do 
+        resource :kind, only: [:show]
+        resource :kind, only: [:show], path: 'relationships/kind'
 
-      resource :address, only: [:show, :update, :create, :destroy]
-      resource :address, only: [:show, :update, :create, :destroy], path: 'relationships/address' 
+        resource :address, only: [:show, :update, :create, :destroy]
+        resource :address, only: [:show, :update, :create, :destroy], path: 'relationships/address' 
 
-      resource :phones, only: [:show]
-      resource :phone, only: [:create, :update, :destroy]
-      resource :phones, only: [:show], path: 'relationships/phones'
-      resource :phone, only: [:create, :update, :destroy], path: 'relationships/phone' 
+        resource :phones, only: [:show]
+        resource :phone, only: [:create, :update, :destroy]
+        resource :phones, only: [:show], path: 'relationships/phones'
+        resource :phone, only: [:create, :update, :destroy], path: 'relationships/phone'
+      end 
     end
   end
 
-  api_version(:module => "V2", :header => {:name => "X-Version", :value => "2.0"}) do 
-    resources :contacts do  
-      resource :kind, only: [:show]
-      resource :kind, only: [:show], path: 'relationships/kind'
+  constraints subdomain: 'v2' do
+    scope module: 'v2' do
+      resources :contacts do  
+        resource :kind, only: [:show]
+        resource :kind, only: [:show], path: 'relationships/kind'
 
-      resource :address, only: [:show, :update, :create, :destroy]
-      resource :address, only: [:show, :update, :create, :destroy], path: 'relationships/address' 
+        resource :address, only: [:show, :update, :create, :destroy]
+        resource :address, only: [:show, :update, :create, :destroy], path: 'relationships/address' 
 
-      resource :phones, only: [:show]
-      resource :phone, only: [:create, :update, :destroy]
-      resource :phones, only: [:show], path: 'relationships/phones'
-      resource :phone, only: [:create, :update, :destroy], path: 'relationships/phone' 
+        resource :phones, only: [:show]
+        resource :phone, only: [:create, :update, :destroy]
+        resource :phones, only: [:show], path: 'relationships/phones'
+        resource :phone, only: [:create, :update, :destroy], path: 'relationships/phone' 
+      end
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
