@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
-  mount_devise_token_auth_for 'User', at: 'auth'
-  # get 'addresses/show'
+  mount_devise_token_auth_for 'User', at: 'auth' # Montagem da authenticaçao de usuario
   
-  # resources :auths, only: [:create]
-  resources :kinds
+  resources :kinds 
   
   # Pega a versao da mesma maneira que query parameter, porem atraves da lib versionist
   api_version(:module => "V1", :path => { :value => "v1" }) do

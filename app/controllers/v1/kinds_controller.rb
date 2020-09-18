@@ -2,7 +2,7 @@ module V1
   class KindsController < ApplicationController
     before_action :set_kind, only: [:show, :update, :destroy]
 
-    before_action :authenticate_user! # Pega a authenticaçao do devise
+    before_action :authencticate_user!
 
     # GET /kinds
     def index

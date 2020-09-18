@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::API
-        include DeviseTokenAuth::Concerns::SetUserByToken
+    include DeviseTokenAuth::Concerns::SetUserByToken
     # Garante que as requisições sejam do tipo json
     before_action :ensure_json_request
 
