@@ -30,6 +30,9 @@ gem 'devise_token_auth'
 gem 'devise-i18n'
 gem 'devise'
 
+# Pagination Gem
+gem 'kaminari'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

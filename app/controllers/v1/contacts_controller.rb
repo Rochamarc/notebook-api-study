@@ -4,19 +4,21 @@ module V1
 
     #before_action :authenticate_user!
 
-    # GET /contacts
+    # GET /v1/contacts?page=1
+    # GET /v1/contacts params => { "page": 1 }
     def index
-      @contacts = Contact.all
+      # Lista cinco contatos por pagina
+      @contacts = Contact.all.page(params[:page]).per(5) 
 
-      render json: @contacts #, methods: [:hello, :i18n]
+      render json: @contacts 
     end
 
-    # GET /contacts/1
+    # GET /v1/contacts/1
     def show
-      render json: @contact, include: [:kind, :phones, :address ] # , meta: { author: "Marcos Rocha" }
+      render json: @contact, include: [:kind, :phones, :address ] 
     end
 
-    # POST /contacts
+    # POST /v1/contacts
     def create
       @contact = Contact.new(contact_params)
 
@@ -27,7 +29,7 @@ module V1
       end
     end
 
-    # PATCH/PUT /contacts/1
+    # PATCH/PUT /v1/contacts/1
     def update
       if @contact.update(contact_params)
         render json: @contact, include: [:kind, :phones, :address]
@@ -36,7 +38,7 @@ module V1
       end
     end
 
-    # DELETE /contacts/1s
+    # DELETE /v1/contacts/1
     def destroy
       # To destroy a phone_number phones_attributes: {"id": 0, "_destroy": 1}
       @contact.destroy
